@@ -1,7 +1,7 @@
 SpreeFosdick
 ============
 
-Introduction goes here.
+Integrate your Spree Store with Fosdick for fulfillment
 
 Installation
 ------------
@@ -36,4 +36,4 @@ Simply add this require statement to your spec_helper:
 require 'spree_fosdick/factories'
 ```
 
-Copyright (c) 2016 [name of extension creator], released under the New BSD License
+Copyright (c) 2016 Manuel Martinez, released under the New BSD License
