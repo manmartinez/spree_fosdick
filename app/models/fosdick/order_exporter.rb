@@ -1,10 +1,10 @@
 class Fosdick::OrderExporter
-  def initialize(options = {})
-    @path = options.fetch(:path)
-    @orders = options.fetch(:orders)
+  def initialize(orders, path: default_path)
+    @orders = orders
+    @path = path
   end
 
-  def save
+  def export
     begin
       export_orders
       add_trailer_records
@@ -12,6 +12,14 @@ class Fosdick::OrderExporter
       header_file.close
       details_file.close
     end
+  end
+
+  def header_path
+    @header_path ||= generate_path('h')
+  end
+
+  def details_path
+    @details_path ||= generate_path('d')
   end
 
   private
@@ -89,11 +97,11 @@ class Fosdick::OrderExporter
   end
 
   def details_file
-    @details_file ||= CSV.open generate_path('d'), 'wb', csv_options
+    @details_file ||= CSV.open details_path, 'wb', csv_options
   end
 
   def header_file
-    @header_file ||= CSV.open generate_path('h'), 'wb', csv_options
+    @header_file ||= CSV.open header_path, 'wb', csv_options
   end
 
   def csv_options
@@ -101,7 +109,7 @@ class Fosdick::OrderExporter
   end
 
   def generate_path(file_type)
-    path.join generate_filename(file_type)
+    File.join path, generate_filename(file_type)
   end
 
   def generate_filename(file_type)
@@ -126,5 +134,9 @@ class Fosdick::OrderExporter
 
   def current_time
     Time.current.in_time_zone Fosdick.config.file_timezone
+  end
+
+  def default_path
+    Fosdick.config.export_path
   end
 end
