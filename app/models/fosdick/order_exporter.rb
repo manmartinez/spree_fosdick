@@ -26,8 +26,8 @@ class Fosdick::OrderExporter
 
   def export_order(order)
     header_file << order_fields(order)
-    order.line_items.find_each do |line_item|
-      details_file << line_item_fields(order, line_item)
+    order.line_items.each_with_index do |line_item, index|
+      details_file << line_item_fields(order, line_item, index)
     end
   end
 
@@ -75,21 +75,17 @@ class Fosdick::OrderExporter
     ]
   end
 
-  def line_item_fields(order, spree_line_item)
+  def line_item_fields(order, spree_line_item, index)
     line_item = Fosdick::LineItemDecorator.new(spree_line_item)
     [
-      order.number, 1, line_item.sku, line_item.quantity,
+      order.number, index + 1, line_item.sku, line_item.quantity,
       line_item.price, line_item.handling_charge,
       line_item.ship_separately_flag, line_item.first_installment_flag
     ]
   end
 
   def product_id
-    "THE_PRODUCT_ID"
-  end
-
-  def order_type_field(order)
-    "WEB"
+    Fosdick.config.product_id
   end
 
   def details_file
@@ -113,7 +109,7 @@ class Fosdick::OrderExporter
   end
 
   def file_prefix
-    "022"
+    Fosdick.config.file_prefix
   end
 
   def sequence_number
@@ -129,6 +125,6 @@ class Fosdick::OrderExporter
   end
 
   def current_time
-    Time.current.in_time_zone("Eastern Time (US & Canada)")
+    Time.current.in_time_zone Fosdick.config.file_timezone
   end
 end
