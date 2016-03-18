@@ -70,7 +70,9 @@ class Fosdick::OrderExporter
       order.delivery_method, order.item_total, order.ship_total,
       order.tax_total, order.promo_total, order.total,
       order.email, order.micr_number, order.check_number,
-      order.bank_name, order.bank_city, order.ship_address.phone
+      order.bank_name, order.bank_city, order.ship_address.phone,
+      order.bank_account_type, order.filler_one, order.filler_two,
+      order.filler_three, order.filler_four, order.filler_five
     ].flatten
   end
 
@@ -88,7 +90,10 @@ class Fosdick::OrderExporter
     [
       order.number, index + 1, line_item.sku, line_item.quantity,
       line_item.price, line_item.handling_charge,
-      line_item.ship_separately_flag, line_item.first_installment_flag
+      line_item.ship_separately_flag, line_item.first_installment_flag,
+      line_item.filler_one, line_item.filler_two, line_item.filler_three,
+      line_item.filler_four, line_item.filler_five, line_item.filler_six,
+      line_item.filler_seven
     ]
   end
 
