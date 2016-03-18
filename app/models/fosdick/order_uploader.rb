@@ -3,8 +3,9 @@ class Fosdick::OrderUploader
     exporter = Fosdick::OrderExporter.new(orders)
     uploader = Fosdick::FileUploader.new(
         host: Fosdick.config.ftp_host,
-        username: Fosdick.config.username,
-        password: Fosdick.config.password
+        username: Fosdick.config.ftp_username,
+        password: Fosdick.config.ftp_password,
+        upload_path: Fosdick.config.ftp_upload_path
     )
 
     exporter.export

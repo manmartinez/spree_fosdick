@@ -16,7 +16,7 @@ class Fosdick::FileUploader
 
   private
 
-  attr_reader :upload_path
+  attr_reader :host, :username, :password, :upload_path
 
   def remote_path_for(local_path)
     filename = File.basename(local_path)
