@@ -1,6 +1,8 @@
 SpreeFosdick
 ============
 
+[![Code Climate](https://codeclimate.com/github/manmartinez/spree_fosdick/badges/gpa.svg)](https://codeclimate.com/github/manmartinez/spree_fosdick)
+
 Integrate your Spree Store with Fosdick for fulfillment
 
 Installation
