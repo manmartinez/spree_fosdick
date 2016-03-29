@@ -64,7 +64,7 @@ class Fosdick::OrderExporter
       order.number, address_fields(order.bill_address), order.bill_address.phone,
       order.card_type, order.card_number, order.card_expiration,
       order.authorization_code, order.authorization_date, order.fosdick_flags,
-      order.product_id, order.inbound_number, order.transaction_time,
+      order.ad_code, order.inbound_number, order.transaction_time,
       order.transaction_date, order.operator_code,
       address_fields(order.ship_address), order.number_of_payments,
       order.delivery_method, order.base_amount, order.shipping_handling_charge,

@@ -8,8 +8,8 @@ class Fosdick::OrderDecorator < SimpleDelegator
                     :filler_one, :filler_two, :filler_three, :filler_four,
                     :filler_five
 
-  def product_id
-    "THE_PRODUCT_ID"
+  def ad_code
+    Fosdick.config.ad_code
   end
 
   def transaction_time
