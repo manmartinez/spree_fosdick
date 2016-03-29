@@ -8,6 +8,9 @@ class Fosdick::OrderDecorator < SimpleDelegator
                     :filler_one, :filler_two, :filler_three, :filler_four,
                     :filler_five
 
+  def product_id
+    "THE_PRODUCT_ID"
+  end
 
   def transaction_time
     completed_at.strftime("%H%M%S")
