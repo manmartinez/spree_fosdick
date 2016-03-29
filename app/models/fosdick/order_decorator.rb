@@ -31,4 +31,24 @@ class Fosdick::OrderDecorator < SimpleDelegator
   def number_of_payments
     1
   end
+
+  def base_amount
+    0.0
+  end
+
+  def shipping_handling_charge
+    0.0
+  end
+
+  def tax
+    0.0
+  end
+
+  def discount
+    0.0
+  end
+
+  def total
+    0.0
+  end
 end

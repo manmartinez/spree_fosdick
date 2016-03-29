@@ -5,4 +5,8 @@ class Fosdick::LineItemDecorator < SimpleDelegator
                    :first_installment_flag, :filler_one,
                    :filler_two, :filler_three, :filler_four,
                    :filler_five, :filler_six, :filler_seven
+
+  def price
+    0.0
+  end
 end
