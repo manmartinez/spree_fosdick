@@ -3,7 +3,7 @@ SpreeFosdick
 
 [![Code Climate](https://codeclimate.com/github/manmartinez/spree_fosdick/badges/gpa.svg)](https://codeclimate.com/github/manmartinez/spree_fosdick)
 
-Integrate your Spree Store with Fosdick for fulfillment
+Integrate your Spree Store with Fosdick for fulfillment via SFTP
 
 Installation
 ------------
@@ -19,6 +19,57 @@ Bundle your dependencies and run the installation generator:
 ```shell
 bundle
 bundle exec rails g spree_fosdick:install
+```
+
+Configuration
+-------------
+
+Create a new initializer at `config/initializers/fosdick.rb` The following example shows the available configuration options and their defaults
+
+
+```ruby
+Fosdick.configure do |config|
+  config.file_prefix = nil
+  config.file_timezone = "Eastern Time (US & Canada)"
+  config.export_path = Rails.root.join('tmp')
+  config.ad_code = nil
+  config.ftp_username = nil
+  config.ftp_host = nil
+  config.ftp_password = nil
+  config.ftp_upload_path = "/in"
+end
+```
+
+Usage
+-----
+
+This extension allows you to post orders from Spree to Fosdick by uploading a tab-separated file to an FTP server.
+
+Here's an example uploading 10 completed orders
+
+```ruby
+orders = Spree::Orders.complete.limit(10)
+Fosdick::OrderUploader.new(orders).upload
+```
+
+You probably want to upload completed orders periodically, there are many ways to accomplish this, probably one of the simplest ones is to add a rake task that is called by a cron job. Here's an example:
+
+In `lib/tasks/fosdick.rake`
+```ruby
+namespace :fosdick do
+  desc "Upload the orders placed today to Fosdick"
+  task :upload_orders do
+    orders = Spree::Orders.completed_today
+    Fosdick::OrderUploader.new(orders).upload
+  end
+end
+```
+
+In `app/models/spree/order_decorator.rb`
+```ruby
+Spree::Order.class_eval do
+  scope :completed_today, ->{ where("completed_at > ?", Time.current.beginning_of_day).where("completed_at < ?", Time.current.end_of_day) }
+end
 ```
 
 Testing
