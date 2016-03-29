@@ -1,3 +1,5 @@
+require 'net/sftp'
+
 class Fosdick::FileUploader
   def initialize(host:, username:, password:, upload_path:)
     @host = host

@@ -16,6 +16,7 @@ Gem::Specification.new do |s|
   s.requirements << 'none'
 
   s.add_dependency 'spree_core', '~> 2.3.0'
+  s.add_dependency 'net-sftp'
 
   s.add_development_dependency 'coffee-rails'
   s.add_development_dependency 'database_cleaner'
