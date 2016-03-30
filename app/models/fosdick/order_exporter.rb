@@ -59,7 +59,7 @@ class Fosdick::OrderExporter
   end
 
   def order_fields(spree_order)
-    order = Fosdick::OrderDecorator.new(spree_order)
+    order = Fosdick::OrderWrapper.new(spree_order)
     [
       order.number, address_fields(order.bill_address), order.bill_address.phone,
       order.card_type, order.card_number, order.card_expiration,
@@ -77,7 +77,7 @@ class Fosdick::OrderExporter
   end
 
   def address_fields(spree_address)
-    address = Fosdick::AddressDecorator.new(spree_address)
+    address = Fosdick::AddressWrapper.new(spree_address)
     [
       address.firstname, address.lastname, address.address1,
       address.address2, address.address3, address.city,
@@ -86,7 +86,7 @@ class Fosdick::OrderExporter
   end
 
   def line_item_fields(order, spree_line_item, index)
-    line_item = Fosdick::LineItemDecorator.new(spree_line_item)
+    line_item = Fosdick::LineItemWrapper.new(spree_line_item)
     [
       order.number, index + 1, line_item.sku, line_item.quantity,
       line_item.price, line_item.handling_charge,

@@ -1,4 +1,4 @@
-class Fosdick::OrderDecorator < SimpleDelegator
+class Fosdick::OrderWrapper < SimpleDelegator
   extend Fosdick::TemplateMethods
 
   template_methods  :inbound_number, :card_number, :card_expiration,

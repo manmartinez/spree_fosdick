@@ -1,4 +1,4 @@
-class Fosdick::LineItemDecorator < SimpleDelegator
+class Fosdick::LineItemWrapper < SimpleDelegator
   extend Fosdick::TemplateMethods
 
   template_methods :handling_charge, :ship_separately_flag,

@@ -1,4 +1,4 @@
-class Fosdick::AddressDecorator < SimpleDelegator
+class Fosdick::AddressWrapper < SimpleDelegator
   extend Fosdick::TemplateMethods
 
   template_methods :address3
