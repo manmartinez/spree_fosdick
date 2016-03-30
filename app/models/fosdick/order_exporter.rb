@@ -34,6 +34,10 @@ class Fosdick::OrderExporter
 
   def export_order(order)
     header_file << order_fields(order)
+    export_line_items(order)
+  end
+
+  def export_line_items(order)
     order.line_items.each_with_index do |line_item, index|
       details_file << line_item_fields(order, line_item, index)
     end
