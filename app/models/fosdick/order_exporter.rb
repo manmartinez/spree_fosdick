@@ -8,6 +8,7 @@ class Fosdick::OrderExporter
     begin
       export_orders
       add_trailer_records
+      increment_sequence_number
     ensure
       header_file.close
       details_file.close
@@ -25,6 +26,10 @@ class Fosdick::OrderExporter
   private
 
   attr_reader :path, :orders
+
+  def increment_sequence_number
+    Fosdick.config.increment_sequence_number!
+  end
 
   def export_orders
     orders.each do |order|
@@ -126,7 +131,7 @@ class Fosdick::OrderExporter
   end
 
   def sequence_number
-    "00001"
+    Fosdick.config.sequence_number.to_s.rjust(5, "0")
   end
 
   def date_string
