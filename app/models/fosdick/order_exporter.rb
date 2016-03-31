@@ -33,8 +33,18 @@ class Fosdick::OrderExporter
 
   def export_orders
     orders.each do |order|
-      export_order(order)
+      begin
+        export_order(order)
+      rescue => e
+        handle_export_exception(order, e)
+      end
     end
+  end
+
+  def handle_export_exception(order, e)
+    Rails.logger.error "Unable to export order #{order.number} to Fosdick"
+    Rails.logger.error e.message
+    Rails.logger.error e.backtrace.join("\n")
   end
 
   def export_order(order)
