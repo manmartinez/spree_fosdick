@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_fosdick'
-  s.version     = '1.0.0'
+  s.version     = '1.0.1'
   s.summary     = 'Integrate your spree store with Fosdick'
   s.description = s.summary
   s.required_ruby_version = '>= 2.1'
